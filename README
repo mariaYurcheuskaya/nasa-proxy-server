@@ -1,0 +1,16 @@
+This is test project for Proxy Server
+
+------------------
+
+Local start
+
+1. Add .env file with the same content as .env.example (only add your values)
+2. To run application use
+```bash
+npm start
+```
+3. To run application with nodeman use
+```bash
+npm start dev
+```
+4. Use localhost:4000/meteors for app testing
