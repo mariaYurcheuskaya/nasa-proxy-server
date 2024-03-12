@@ -1,16 +1,27 @@
 const axios = require("axios");
+const meteorMapper = require('../mapper/meteorsMapper')
 
 const processMeteorsData = (meteors) => {
   const data = meteors.data;
-  console.log(JSON.stringify(data, null, 4));
-  printAsteroidsAmount(data);
-  return data;
+  printMeteorsData(data);
+
+  return mapMeteorsData(data.near_earth_objects)
 }
 
-const printAsteroidsAmount = (meteorsData) => {
-  const amount = meteorsData.element_count;
+const mapMeteorsData = (meteors) => {
+  let meteorsArray = [];
+
+  Object.values(meteors).forEach(meteor => {
+    const meteorMapped = meteor.map(element => meteorMapper(element));
+    meteorsArray.push(meteorMapped);
+  });
+  return meteorsArray.flat();
+}
+
+const printMeteorsData = (meteorsData) => {
+  console.log(JSON.stringify(meteorsData, null, 2));
   console.log(
-      `${amount} of asteroids were seen were seen from Monday to Friday`);
+      `${meteorsData.element_count} of asteroids were seen were seen from Monday to Friday`);
 }
 
 const getMeteorsData = (startDate, endDate) => {

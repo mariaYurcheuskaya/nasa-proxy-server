@@ -1,5 +1,5 @@
 const express = require('express')
-const meteorsRouter = require('./src/routers/meteorsRouter')
+const meteorsRouter = require('./routers/meteorsRouter')
 
 const app = express();
 app.use(express.json())
