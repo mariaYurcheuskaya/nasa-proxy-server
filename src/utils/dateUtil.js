@@ -2,10 +2,16 @@ const {previousFriday, previousMonday, format} = require('date-fns');
 
 const DATE_FORMAT = 'yyyy-MM-dd';
 
-const fridayDate = previousFriday(new Date());
-const mondayDate = previousMonday(fridayDate);
+const calculateDates = (userDate) => {
+  const date = userDate ?? new Date();
 
-const endDate = format(fridayDate, DATE_FORMAT);
-const startDate = format(mondayDate, DATE_FORMAT);
+  const fridayDate = previousFriday(date);
+  const mondayDate = previousMonday(fridayDate);
 
-module.exports = {endDate, startDate}
+  const endDate = format(fridayDate, DATE_FORMAT);
+  const startDate = format(mondayDate, DATE_FORMAT);
+
+  return {startDate, endDate};
+}
+
+module.exports = {calculateDates}

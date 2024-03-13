@@ -1,13 +1,20 @@
 const {meteorsService} = require('../services')
-const {startDate, endDate} = require('../utils/dateUtil')
 
 const getMeteors = async (req, res, next) => {
   try {
-    const meteors = await meteorsService.getMeteorsData(startDate, endDate);
+    const request = buildRequest(req.query);
+
+    const meteors = await meteorsService.getMeteorsData(request);
     res.json(meteors);
   } catch (error) {
     next(error);
   }
 }
+
+const buildRequest = (query) => ({
+  date: query.date,
+  count: query.count === 'true',
+  hasDangerousMeteors: query.were_dangerous_meteors === 'true'
+})
 
 module.exports = {getMeteors}
