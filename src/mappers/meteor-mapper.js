@@ -1,4 +1,4 @@
-const meteorMapper = (meteor) => {
+  const mapMeteor = (meteor) => {
   return {
     id: meteor.id,
     name: meteor.name,
@@ -10,4 +10,6 @@ const meteorMapper = (meteor) => {
   }
 }
 
-module.exports = meteorMapper
+module.exports = {
+  mapMeteor
+};

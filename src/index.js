@@ -1,9 +1,11 @@
-const express = require('express')
-const meteorsRouter = require('./routers/meteorsRouter')
+const express = require('express');
+const meteorsRouter = require('./routes/meteors-routers')
+const {PORT} = require('./config/environment');
 
 const app = express();
-app.use(express.json())
-app.use('/meteors', meteorsRouter)
+
+app.use(express.json());
+app.use('/meteors', meteorsRouter);
 
 app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
@@ -14,6 +16,6 @@ app.use('*', (req, res) =>
     res.status(404).json({message: 'Page not found'}),
 );
 
-app.listen(process.env.PORT, () => {
+app.listen(PORT, () => {
   console.log('server listens to port 4000')
 })
