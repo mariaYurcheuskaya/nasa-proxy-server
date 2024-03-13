@@ -18,6 +18,7 @@ const getMeteorsData = async (request) => {
     throw new Exception(500, err.message)
   })
 }
+
 const processMeteorsData = (meteors, request) => {
   const data = meteors.data;
   printMeteorsData(data);
