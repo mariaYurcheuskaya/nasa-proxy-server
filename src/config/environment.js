@@ -1,9 +1,11 @@
 require('dotenv').config();
 
-const { NASA_URL, API_KEY, PORT } = process.env;
+const { NASA_BASE_URL, METEORS_URL, MANIFEST_URL, ROVER_PHOTO_URL, API_KEY, PORT } = process.env;
 
 module.exports = {
-  NASA_URL,
+  meteorUrl: NASA_BASE_URL + METEORS_URL,
+  manifestUrl: NASA_BASE_URL + MANIFEST_URL,
+  roverPhotoUrl: NASA_BASE_URL + ROVER_PHOTO_URL,
   API_KEY,
   PORT,
 };
