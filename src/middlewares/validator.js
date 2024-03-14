@@ -2,13 +2,14 @@ const schemas = require('../validators/schemas');
 const Exception = require('../exception/Exception');
 
 const validate = (schema) => {
-  if (!schemas.hasOwnProperty(schema)) {
+  const validator = schemas[schema];
+  if (!validator) {
     throw new Error(`'${schema}' validator does not exist`);
   }
 
   return async (req, res, next) => {
     try {
-      req.query = await schemas[schema].validateAsync(req.query);
+      req.query = await validator.validateAsync(req.query);
       next();
     } catch (err) {
       if (err.isJoi) {
