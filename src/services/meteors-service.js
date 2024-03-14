@@ -1,6 +1,6 @@
 const axios = require('axios');
 const { meteorMapper } = require('../mappers');
-const { NASA_BASE_URL, METEORS_URL, API_KEY } = require('../config/environment');
+const { meteorUrl, API_KEY } = require('../config/environment');
 const { calculateDates } = require('../utils/dateUtil');
 const Exception = require('../exception/Exception');
 
@@ -8,7 +8,7 @@ const getMeteorsData = async (request) => {
   const { startDate, endDate } = calculateDates(request.date);
 
   return axios
-    .get(NASA_BASE_URL + METEORS_URL, {
+    .get(meteorUrl, {
       params: {
         start_date: startDate,
         end_date: endDate,
