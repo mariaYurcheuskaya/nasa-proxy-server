@@ -1,4 +1,4 @@
-const {meteorsService} = require('../services')
+const { meteorsService } = require('../services');
 
 const getMeteors = async (req, res, next) => {
   try {
@@ -9,12 +9,12 @@ const getMeteors = async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-}
+};
 
 const buildRequest = (query) => ({
   date: query.date,
   count: query.count === 'true',
-  hasDangerousMeteors: query.were_dangerous_meteors === 'true'
-})
+  hasDangerousMeteors: query.were_dangerous_meteors === 'true',
+});
 
-module.exports = {getMeteors}
+module.exports = { getMeteors };

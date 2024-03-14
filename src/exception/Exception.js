@@ -5,3 +5,5 @@ class Exception extends Error {
     this.message = message;
   }
 }
+
+module.exports = Exception;
