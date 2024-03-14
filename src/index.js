@@ -1,11 +1,13 @@
 const express = require('express');
 const meteorsRouter = require('./routes/meteors-routers');
+const nasaPhotoRouter = require('./routes/nasa-photo-router');
 const { PORT } = require('./config/environment');
 
 const app = express();
 
 app.use(express.json());
 app.use('/meteors', meteorsRouter);
+app.use('/roverPhoto', nasaPhotoRouter);
 
 // eslint-disable-next-line no-unused-vars
 app.use((err, req, res, next) => {

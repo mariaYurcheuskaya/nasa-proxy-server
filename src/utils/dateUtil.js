@@ -1,6 +1,5 @@
 const { previousFriday, previousMonday, format } = require('date-fns');
-
-const DATE_FORMAT = 'yyyy-MM-dd';
+const { DATE_FORMAT } = require('../constants/constants');
 
 const calculateDates = (userDate) => {
   const date = userDate ?? new Date();
