@@ -4,12 +4,12 @@ const express = require('express');
 const meteorsRouter = require('./routes/meteors-routers');
 const nasaPhotoRouter = require('./routes/nasa-photo-router');
 const { pageNotFoundHandler, errorHandler } = require('./middlewares');
-const { PORT, DNS } = require('./config/environment');
+const { PORT, DSN } = require('./config/environment');
 
 const app = express();
 
 Sentry.init({
-  dsn: DNS,
+  dsn: DSN,
   integrations: [
     new Sentry.Integrations.Http({ tracing: true }),
     new Sentry.Integrations.Express({ app }),
