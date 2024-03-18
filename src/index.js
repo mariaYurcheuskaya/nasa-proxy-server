@@ -1,24 +1,24 @@
-const Sentry = require('@sentry/node');
-const { nodeProfilingIntegration } = require('@sentry/profiling-node');
 const express = require('express');
+const path = require('node:path');
+const nunjucks = require('nunjucks');
 const meteorsRouter = require('./routes/meteors-routers');
 const nasaPhotoRouter = require('./routes/nasa-photo-router');
+const sentryInit = require('./middlewares/sentry');
 const { pageNotFoundHandler, errorHandler } = require('./middlewares');
-const { PORT, DSN } = require('./config/environment');
+const { PORT } = require('./config/environment');
 
 const app = express();
 
-Sentry.init({
-  dsn: DSN,
-  integrations: [
-    new Sentry.Integrations.Http({ tracing: true }),
-    new Sentry.Integrations.Express({ app }),
-    nodeProfilingIntegration(),
-  ],
-  tracesSampleRate: 1.0,
-  profilesSampleRate: 1.0,
+app.use(express.static(path.resolve(__dirname, 'public')));
+
+nunjucks.configure(path.resolve(__dirname, 'views'), {
+  express: app,
+  autoscape: true,
+  noCache: false,
+  watch: true,
 });
 
+const Sentry = sentryInit(app);
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
@@ -30,6 +30,8 @@ app.use(Sentry.Handlers.errorHandler());
 
 app.use(errorHandler);
 app.use('*', pageNotFoundHandler);
+
+app.set('view engine', 'html');
 
 app.listen(PORT, () => {
   console.log('server listens to port 4000');

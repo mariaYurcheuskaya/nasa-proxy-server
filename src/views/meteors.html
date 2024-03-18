@@ -1,0 +1,32 @@
+{% extends "./layout.html" %} {% block content %}
+
+<head>
+  <title>Asteroids</title>
+</head>
+
+<body>
+  <div>
+    {% if data.hasDangerousMeteors %}
+    <h1>Attention! Dangerous asteroids have been discovered!</h1>
+    {% else %}
+    <h2>Keep calm! Dangerous asteroids have not been discovered</h2>
+    {% endif %} {% if data.count %}
+    <p>There amount of meteors is {{data.count}}</p>
+    {% else %}
+    <ul>
+      {% for meteor in data.meteors %}
+      <hr />
+      <li>Id: {{meteor.id}}</li>
+      <li>Name: {{meteor.name}}</li>
+      <li>Estimated diameter min: {{meteor.estimated_diameter_min}}</li>
+      <li>Estimated diameter max: {{meteor.estimated_diameter_max}}</li>
+      <li>Is dangerous: {{meteor.is_potentially_hazardous_asteroid}}</li>
+      <li>Close approach date: {{meteor.close_approach_date_full}}</li>
+      <li>Relative velocity: {{meteor.relative_velocity}}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+</body>
+
+{% endblock %}
