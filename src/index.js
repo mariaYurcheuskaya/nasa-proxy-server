@@ -1,27 +1,15 @@
-const Sentry = require('@sentry/node');
-const { nodeProfilingIntegration } = require('@sentry/profiling-node');
 const express = require('express');
 const path = require('node:path');
 const nunjucks = require('nunjucks');
 const meteorsRouter = require('./routes/meteors-routers');
 const nasaPhotoRouter = require('./routes/nasa-photo-router');
+const sentryInit = require('./middlewares/sentry');
 const { pageNotFoundHandler, errorHandler } = require('./middlewares');
-const { PORT, DSN } = require('./config/environment');
+const { PORT } = require('./config/environment');
 
 const app = express();
 
 app.use(express.static(path.resolve(__dirname, 'public')));
-
-Sentry.init({
-  dsn: DSN,
-  integrations: [
-    new Sentry.Integrations.Http({ tracing: true }),
-    new Sentry.Integrations.Express({ app }),
-    nodeProfilingIntegration(),
-  ],
-  tracesSampleRate: 1.0,
-  profilesSampleRate: 1.0,
-});
 
 nunjucks.configure(path.resolve(__dirname, 'views'), {
   express: app,
@@ -30,6 +18,7 @@ nunjucks.configure(path.resolve(__dirname, 'views'), {
   watch: true,
 });
 
+const Sentry = sentryInit(app);
 app.use(Sentry.Handlers.requestHandler());
 app.use(Sentry.Handlers.tracingHandler());
 
