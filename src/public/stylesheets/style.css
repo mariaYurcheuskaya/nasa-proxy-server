@@ -1,0 +1,44 @@
+body {
+  background-color: lightblue;
+}
+
+title {
+  color: navy;
+  margin-left: 20px;
+}
+
+.header {
+  background-color: beige;
+  color: cadetblue;
+  padding: 15px;
+  text-align: center;
+}
+
+.footer {
+  background-color: beige;
+  color: cadetblue;
+  padding: 15px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+ul {
+  background: #3399ff;
+  padding: 20px;
+}
+
+ul li {
+  margin: 5px;
+}
+
+h1 {
+  color: red;
+  text-align: center;
+}
+
+h2 {
+  color: darkblue;
+  text-align: center;
+}

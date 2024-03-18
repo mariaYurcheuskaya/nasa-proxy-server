@@ -5,7 +5,7 @@ const getMeteors = async (req, res, next) => {
     const request = buildRequest(req.query);
 
     const meteors = await meteorsService.getMeteorsData(request);
-    res.json(meteors);
+    res.render('meteors.html', { data: meteors });
   } catch (error) {
     next(error);
   }
@@ -13,8 +13,8 @@ const getMeteors = async (req, res, next) => {
 
 const buildRequest = (query) => ({
   date: query.date,
-  count: query.count === 'true',
-  hasDangerousMeteors: query.were_dangerous_meteors === 'true'
+  count: query.count === true,
+  hasDangerousMeteors: query.hasDangerousMeteors === true,
 });
 
 module.exports = { getMeteors };

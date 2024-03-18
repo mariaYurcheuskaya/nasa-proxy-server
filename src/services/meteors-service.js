@@ -30,7 +30,7 @@ const processMeteorsData = (meteors, request) => {
   let response = { meteors: transformedData };
 
   if (request.hasDangerousMeteors) {
-    response.wereDangerousMeteors = transformedData.some((data) => data.is_potentially_hazardous_asteroid);
+    response.hasDangerousMeteors = transformedData.some((data) => data.is_potentially_hazardous_asteroid);
   }
 
   if (request.count) {
