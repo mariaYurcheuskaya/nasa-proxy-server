@@ -1,7 +1,8 @@
-const express = require('express');
-const { nasaPhotoController } = require('../controllers');
-const router = express.Router();
+import express from 'express';
+import { postRoverPhoto } from '../controllers/nasa-photo-controller.js';
 
-router.post('/', nasaPhotoController.postRoverPhoto);
+const nasaPhotoRouter = express.Router();
 
-module.exports = router;
+nasaPhotoRouter.post('/roverPhoto', postRoverPhoto);
+
+export default nasaPhotoRouter;

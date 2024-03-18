@@ -1,15 +1,15 @@
-const schemas = require('../validators/schemas');
-const Exception = require('../exception/Exception');
+import schemas from '../validators/schemas/meteor-request-schema.js';
+import { Exception } from '../exception/Exception.js';
 
-const validate = (schema) => {
-  const validator = schemas[schema];
-  if (!validator) {
-    throw new Error(`'${schema}' validator does not exist`);
-  }
+export const validate = (schema) => {
+  // const validator = schemas[schema];
+  // if (!validator) {
+  //   throw new Error(`'${schema}' validator does not exist`);
+  // }
 
   return async (req, res, next) => {
     try {
-      req.query = await validator.validateAsync(req.query);
+      req.query = await schemas.validateAsync(req.query);
       next();
     } catch (err) {
       if (err.isJoi) {
@@ -19,5 +19,3 @@ const validate = (schema) => {
     }
   };
 };
-
-module.exports = validate;

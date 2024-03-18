@@ -1,9 +1,9 @@
-const express = require('express');
-const { meteorsController } = require('../controllers');
-const { validator } = require('../middlewares');
+import express from 'express';
+import { getMeteors } from '../controllers/meteors-controller.js';
+import { validate } from '../middlewares/validator.js';
 
-const router = express.Router();
+const meteorsRouter = express.Router();
 
-router.get('/', validator('meteorRequestSchema'), meteorsController.getMeteors);
+meteorsRouter.get('/meteors', validate('meteorRequestSchema'), getMeteors);
 
-module.exports = router;
+export default meteorsRouter;

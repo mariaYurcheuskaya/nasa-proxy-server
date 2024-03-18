@@ -1,12 +1,10 @@
-const { roverPhotoService } = require('../services');
+import { getRoverPhotoUrl } from '../services/rover-photo-service.js';
 
-const postRoverPhoto = async (req, res, next) => {
+export const postRoverPhoto = async (req, res, next) => {
   try {
-    const roverPhotoUrl = await roverPhotoService.getRoverPhotoUrl();
+    const roverPhotoUrl = await getRoverPhotoUrl();
     res.render('rover-photo.html', { roverPhotoUrl });
   } catch (error) {
     next(error);
   }
 };
-
-module.exports = { postRoverPhoto };

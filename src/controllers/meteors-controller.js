@@ -1,10 +1,10 @@
-const { meteorsService } = require('../services');
+import { getMeteorsData } from '../services/meteors-service.js';
 
-const getMeteors = async (req, res, next) => {
+export const getMeteors = async (req, res, next) => {
   try {
     const request = buildRequest(req.query);
 
-    const meteors = await meteorsService.getMeteorsData(request);
+    const meteors = await getMeteorsData(request);
     res.render('meteors.html', { data: meteors });
   } catch (error) {
     next(error);
@@ -16,5 +16,3 @@ const buildRequest = (query) => ({
   count: query.count === true,
   hasDangerousMeteors: query.hasDangerousMeteors === true,
 });
-
-module.exports = { getMeteors };

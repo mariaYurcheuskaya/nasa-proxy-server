@@ -1,4 +1,4 @@
-const mapMeteor = (meteor) => {
+export const mapMeteor = (meteor) => {
   return {
     id: meteor.id,
     name: meteor.name,
@@ -8,8 +8,4 @@ const mapMeteor = (meteor) => {
     close_approach_date_full: meteor.close_approach_data[0].close_approach_date_full,
     relative_velocity: meteor.close_approach_data[0].relative_velocity.kilometers_per_second,
   };
-};
-
-module.exports = {
-  mapMeteor,
 };

@@ -1,18 +1,18 @@
-const axios = require('axios');
-const { meteorMapper } = require('../mappers');
-const { meteorUrl, API_KEY } = require('../config/environment');
-const { calculateDates } = require('../utils/dateUtil');
-const Exception = require('../exception/Exception');
+import axios from 'axios';
+import { mapMeteor } from '../mappers/meteor-mapper.js';
+import { env } from '../config/environment.js';
+import { calculateDates } from '../utils/dateUtil.js';
+import {Exception} from '../exception/Exception.js';
 
-const getMeteorsData = async (request) => {
+export const getMeteorsData = async (request) => {
   const { startDate, endDate } = calculateDates(request.date);
 
   return axios
-    .get(meteorUrl, {
+    .get(env.meteorUrl, {
       params: {
         start_date: startDate,
         end_date: endDate,
-        api_key: API_KEY,
+        api_key: env.API_KEY,
       },
     })
     .then((data) => processMeteorsData(data, request))
@@ -41,12 +41,10 @@ const processMeteorsData = (meteors, request) => {
 };
 
 const mapMeteorsData = (meteors) => {
-  return Object.values(meteors).flatMap((meteor) => meteor.map((data) => meteorMapper.mapMeteor(data)));
+  return Object.values(meteors).flatMap((meteor) => meteor.map((data) => mapMeteor(data)));
 };
 
 const printMeteorsData = (meteorsData) => {
   console.log(JSON.stringify(meteorsData, null, 2));
   console.log(`${meteorsData.element_count} of asteroids were seen were seen from Monday to Friday`);
 };
-
-module.exports = { getMeteorsData };
