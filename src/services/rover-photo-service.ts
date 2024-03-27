@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { env } from '../config/environment.js';
-import { constants } from '../constants/constants.js';
+import { env } from '../config/environment';
+import { constants } from '../constants/constants';
 import { format } from 'date-fns';
 
 export const getRoverPhotoUrl = async () => {
@@ -26,7 +26,7 @@ const getManifestData = async () => {
   return manifest.data;
 };
 
-const getRoverData = async (earthDate) => {
+const getRoverData = async (earthDate: string) => {
   const photos = await axios.get(env.roverPhotoUrl, {
     params: {
       earth_date: earthDate,

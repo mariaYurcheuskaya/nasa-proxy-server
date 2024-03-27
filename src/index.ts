@@ -1,6 +1,5 @@
 import express from 'express';
 import path from 'node:path';
-const __dirname = import.meta.dirname;
 import nunjucks from 'nunjucks';
 import  meteorsRouter  from './routes/meteors-routers.js';
 import  nasaPhotoRouter  from './routes/nasa-photo-router.js';
@@ -17,7 +16,6 @@ app.use(express.static(path.resolve(__dirname, 'public')));
 
 nunjucks.configure(path.resolve(__dirname, 'views'), {
   express: app,
-  autoscape: true,
   noCache: false,
   watch: true
 });
