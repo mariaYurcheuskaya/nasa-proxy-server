@@ -1,4 +1,4 @@
-import { constants } from '../../constants/constants.js';
+import { constants } from '../../constants/constants';
 
 import BaseJoi from 'joi';
 import JoiDate from '@joi/date';

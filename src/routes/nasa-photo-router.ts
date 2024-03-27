@@ -1,5 +1,5 @@
 import express from 'express';
-import { postRoverPhoto } from '../controllers/nasa-photo-controller.js';
+import { postRoverPhoto } from '../controllers/nasa-photo-controller';
 
 const nasaPhotoRouter = express.Router();
 

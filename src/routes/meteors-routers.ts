@@ -1,6 +1,6 @@
 import express from 'express';
-import { getMeteors } from '../controllers/meteors-controller.js';
-import { validate } from '../middlewares/validator.js';
+import { getMeteors } from '../controllers/meteors-controller';
+import { validate } from '../middlewares/validator';
 
 const meteorsRouter = express.Router();
 
